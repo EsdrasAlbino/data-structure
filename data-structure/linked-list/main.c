@@ -2,14 +2,24 @@
 #include <stdlib.h>
 
 // Define the structure for a node in the linked list
-struct Node {
+typedef struct Node {
     int data;
     struct Node* next;
-};
+} Node;
+
+
+// i can define Node as a type with: typedef struct Node Node;
+
+Node *createList(int data){
+    Node *head = malloc(sizeof(Node));
+    head->data = data;
+    head->next = NULL;
+    return head;
+}
 
 // Function to create a new node
-struct Node* createNode(int data) {
-    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+ Node* createNode(int data) {
+     Node* newNode = ( Node*)malloc(sizeof( Node));
     if (newNode == NULL) {
         printf("Memory allocation failed!\n");
         exit(1);
@@ -20,21 +30,21 @@ struct Node* createNode(int data) {
 }
 
 // Function to insert a node at the beginning of the list
-struct Node* insertAtBeginning(struct Node* head, int data) {
-    struct Node* newNode = createNode(data);
+ Node* insertAtBeginning( Node* head, int data) {
+     Node* newNode = createNode(data);
     newNode->next = head;
     return newNode;
 }
 
 // Function to insert a node at the end of the list
-struct Node* insertAtEnd(struct Node* head, int data) {
-    struct Node* newNode = createNode(data);
+ Node* insertAtEnd( Node* head, int data) {
+     Node* newNode = createNode(data);
     
     if (head == NULL) {
         return newNode;
     }
     
-    struct Node* current = head;
+     Node* current = head;
     while (current->next != NULL) {
         current = current->next;
     }
@@ -43,8 +53,8 @@ struct Node* insertAtEnd(struct Node* head, int data) {
 }
 
 // Function to print the linked list
-void printList(struct Node* head) {
-    struct Node* current = head;
+void printList( Node* head) {
+     Node* current = head;
     while (current != NULL) {
         printf("%d -> ", current->data);
         current = current->next;
@@ -53,17 +63,17 @@ void printList(struct Node* head) {
 }
 
 // Function to free the memory allocated for the linked list
-void freeList(struct Node* head) {
-    struct Node* current = head;
+void freeList( Node* head) {
+     Node* current = head;
     while (current != NULL) {
-        struct Node* temp = current;
+         Node* temp = current;
         current = current->next;
         free(temp);
     }
 }
 
 int main() {
-    struct Node* head = NULL;  // Initialize an empty list
+     Node* head = NULL;  // Initialize an empty list
     
     // Insert some elements
     head = insertAtEnd(head, 10);
